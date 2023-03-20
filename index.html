@@ -5,23 +5,22 @@
   </head>
   <body>
   
-    <script>
-    var wtj = require('website-to-json')
-    wtj.extractData('http://stackoverflow.com/questions/3207418/crawler-vs-scraper', {
-      fields: ['data'],
-      parse: function($) {
-        return {
-          title: $("h1").text(),
-          keywords: $('.post-taglist a').map(function(val) {
-            return $(this).text()
-          }).get()
-        }
-      }
-    })
-    .then(function(res) {
-      console.log(JSON.stringify(res, null, 2));
-    })
-    </script>
+  <div id="demo">
+  <h2>The XMLHttpRequest Object</h2>
+  <button type="button" onclick="loadDoc()">Change Content</button>
+  </div>
+
+  <script>
+  function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+    xhttp.open("GET", "ajax_info.txt");
+    xhttp.send();
+  }
+  </script>
     
     
     
