@@ -21,24 +21,24 @@
     xhttp.open("GET", "ajax_info.html");
     xhttp.send(); */
 
-    var settings = {
-      "url": "https://intra.uratex.com.ph/api/ux_sms/send",
-      "method": "POST",
-      "timeout": 0,
-      "headers": {
-        "apikey": "7249b334e8b31e17b0d279b2ba8d4jau2",
-        "Content-Type": "application/json"
-      },
-      "data": JSON.stringify({
-        "destination": "09178065038",
-        "text": "Demo for API Topic"
-      }),
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML = this.responseText;
+      }
     };
-    
-    $.ajax(settings).done(function (response) {
-      console.log(response);
+    xhttp.open("POST", "https://intra.uratex.com.ph/api/ux_sms/send", true);
+    xhttp.setRequestHeader("apikey", "7249b334e8b31e17b0d279b2ba8d4jau2");
+    xhttp.setRequestHeader("Origin", "http://localhost");
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify({
+      "destination": "09178065038",
+      "text": "Demo for API Topic"
     });
-  }
+    xhttp.send(data);
+
+    
   </script>
     
     
