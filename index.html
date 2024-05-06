@@ -12,13 +12,35 @@
 
   <script>
   function loadDoc() {
-    const xhttp = new XMLHttpRequest();
+    /* const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
       document.getElementById("demo").innerHTML =
       this.responseText;
     }
     xhttp.open("GET", "ajax_info.html");
-    xhttp.send();
+    xhttp.send(); */
+
+    // WARNING: For POST requests, body is set to null by browsers.
+    var data = JSON.stringify({
+      "destination": "09178065038",
+      "text": "Demo for API Topic"
+    });
+    
+    var xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+    
+    xhr.addEventListener("readystatechange", function() {
+      if(this.readyState === 4) {
+        console.log(this.responseText);
+      }
+    });
+    
+    xhr.open("POST", "https://intra.uratex.com.ph/api/ux_sms/send");
+    xhr.setRequestHeader("apikey", "7249b334e8b31e17b0d279b2ba8d4jau2");
+    xhr.setRequestHeader("Origin", "http://localhost");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    
+    xhr.send(data);
   }
   </script>
     
