@@ -1,0 +1,23 @@
+name: Deploy on Merge
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Deploy files to server
+      run: |
+        scp -r . jun@10.0.120.160:/path/to/deploy/folder
